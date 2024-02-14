@@ -10,9 +10,13 @@ import 'package:movie_app/services/api_service.dart';
 import 'package:movie_app/utils/colors_list.dart';
 import 'databases/app_database.dart';
 import 'global.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 void main() async {
   await Global.init();
+  await dotenv.load(fileName: ".env");
+
 
   final appDatabase = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
   final tmdbApiClient = TmdbApiClient();
