@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import '../../../../models/trailer_model.dart';
 
 abstract class TrailerState extends Equatable {

@@ -8,7 +8,7 @@ Color fillColor = Colors.blue.shade300;
 Color delColor = const Color(0xffB81736);
 
 
-List<Color> genreColors = [
+List<Color> genreColors =const  [
   Color(0xFFE57373),
   Color(0xFFF06292),
   Color(0xFFBA68C8),

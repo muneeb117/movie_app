@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -6,20 +5,20 @@ import 'package:movie_app/utils/colors_list.dart';
 import 'package:movie_app/view/screens/cinema_booking/screens/cinema_screen/seat_selection_screen.dart';
 import 'package:movie_app/view/widgets/reusable_button.dart';
 
-import '../../../../../models/booking_model.dart';
+import '../../widgets/date_selection_tile_widget.dart';
 
 class MovieDateAndHallSelectionScreen extends StatefulWidget {
   final String movieName;
   final String releaseDate;
 
-  MovieDateAndHallSelectionScreen({
+  const MovieDateAndHallSelectionScreen({
     Key? key,
     required this.movieName,
     required this.releaseDate,
   }) : super(key: key);
 
   @override
-  _MovieDateAndHallSelectionScreenState createState() =>
+  State<MovieDateAndHallSelectionScreen> createState() =>
       _MovieDateAndHallSelectionScreenState();
 }
 
@@ -38,8 +37,8 @@ class _MovieDateAndHallSelectionScreenState
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: (){
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
             Navigator.pop(context);
           },
         ),
@@ -50,11 +49,11 @@ class _MovieDateAndHallSelectionScreenState
           children: [
             Text(
               widget.movieName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
             Text(
@@ -70,7 +69,7 @@ class _MovieDateAndHallSelectionScreenState
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           const Padding(
@@ -84,7 +83,7 @@ class _MovieDateAndHallSelectionScreenState
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 10),
+            margin: const EdgeInsets.only(left: 10),
             height: 40,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -122,11 +121,11 @@ class _MovieDateAndHallSelectionScreenState
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 20),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: isSelected ? Colors.blue : Colors.grey,
-
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -138,12 +137,12 @@ class _MovieDateAndHallSelectionScreenState
                           width: 100,
                           height: 100,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           hallName,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: AppColors.primarySecondaryElementText),
                         ),
                       ],
@@ -171,49 +170,6 @@ class _MovieDateAndHallSelectionScreenState
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class DateSelectionTile extends StatelessWidget {
-  final DateTime date;
-  final bool isSelected;
-  final VoidCallback onSelect;
-
-  const DateSelectionTile({
-    Key? key,
-    required this.date,
-    required this.isSelected,
-    required this.onSelect,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onSelect,
-      child: Container(
-        width: 80,
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-          // boxShadow: [
-          //   BoxShadow(
-          //   color: fillColor.withOpacity(0.3),
-          //   spreadRadius: 10,
-          //   offset: Offset(0,1),
-          // )],
-          color: isSelected ? fillColor : Colors.grey[300],
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Center(
-          child: Text(
-            DateFormat('d MMM').format(date),
-            style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 12),
-          ),
-        ),
       ),
     );
   }

@@ -11,19 +11,19 @@ class TrailerPlayerScreen extends StatefulWidget {
   const TrailerPlayerScreen({Key? key, this.movieId}) : super(key: key);
 
   @override
-  _TrailerPlayerScreenState createState() => _TrailerPlayerScreenState();
+  State<TrailerPlayerScreen> createState() => _TrailerPlayerScreenState();
 }
 
 class _TrailerPlayerScreenState extends State<TrailerPlayerScreen> {
-  YoutubePlayerController? _controller;
+   YoutubePlayerController? _controller;
 
   void _initializePlayer(String videoId) {
     _controller = YoutubePlayerController(
       initialVideoId: videoId,
-      flags: YoutubePlayerFlags(autoPlay: true, mute: false),
+      flags: const YoutubePlayerFlags(autoPlay: true, mute: false),
     )..addListener(() {
       if (_controller!.value.playerState == PlayerState.ended) {
-        Navigator.of(context).pop(); // Pop the screen when the video ends
+        Navigator.of(context).pop();
       }
     });
   }
@@ -38,10 +38,10 @@ class _TrailerPlayerScreenState extends State<TrailerPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trailer',style: TextStyle(color: Colors.white),),
+        title:const Text('Trailer',style: TextStyle(color: Colors.white),),
         leading: IconButton(onPressed: () {
           Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,size: 18,),),
+        }, icon:  const Icon(Icons.arrow_back_ios,color: Colors.white,size: 18,),),
         backgroundColor: Colors.black,
       ),
       body: BlocConsumer<TrailerBloc, TrailerState>(
@@ -59,7 +59,7 @@ class _TrailerPlayerScreenState extends State<TrailerPlayerScreen> {
         },
         builder: (context, state) {
           if (state is TrailerLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is TrailersLoaded) {
             return Column(
               children: [
@@ -69,12 +69,12 @@ class _TrailerPlayerScreenState extends State<TrailerPlayerScreen> {
                     controller: _controller!,
                     showVideoProgressIndicator: true,
                   )
-                      : Center(child: Text("Select a trailer")),
+                      :const Center(child: Text("Select a trailer")),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    height: 140, // Adjust based on your UI requirement
+                  child: SizedBox(
+                    height: 140,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: state.trailers.length,
@@ -100,7 +100,7 @@ class _TrailerPlayerScreenState extends State<TrailerPlayerScreen> {
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Text(
                                       trailer.name,
-                                      style: TextStyle(color: Colors.black),
+                                      style:const TextStyle(color: Colors.black),
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
@@ -119,7 +119,7 @@ class _TrailerPlayerScreenState extends State<TrailerPlayerScreen> {
           } else if (state is TrailerError) {
             return Center(child: Text(state.message));
           }
-          return Center(child: Text('No trailers available.'));
+          return const Center(child: Text('No trailers available.'));
         },
       ),
     );

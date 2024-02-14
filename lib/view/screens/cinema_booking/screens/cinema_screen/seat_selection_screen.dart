@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../models/booking_model.dart';
 import '../../../../../models/seat_model.dart';
 import '../../../../../models/user_detail_model.dart';
@@ -15,11 +14,12 @@ class SeatSelectionScreen extends StatefulWidget {
   final DateTime selectedDate;
   final String selectedHall;
 
-  SeatSelectionScreen({Key? key, required this.selectedDate, required this.selectedHall})
+  const SeatSelectionScreen({Key? key, required this.selectedDate, required this.selectedHall})
       : super(key: key);
 
+
   @override
-  _SeatSelectionScreenState createState() => _SeatSelectionScreenState();
+  State<SeatSelectionScreen> createState() => _SeatSelectionScreenState();
 }
 
 class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
@@ -91,10 +91,10 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height: 40,),
+          const SizedBox(height: 40,),
           Center(child: SvgPicture.asset("assets/icons/screen.svg")),
 
-          SizedBox(height: 10,),
+          const   SizedBox(height: 10,),
 
 
           Expanded(
@@ -156,8 +156,8 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                margin:const EdgeInsets.symmetric(horizontal: 10),
+                padding:const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
 
                 decoration: BoxDecoration(
                   color: AppColors.strokeColor,
@@ -176,13 +176,13 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                     children: <TextSpan>[
                       TextSpan(
                         text: '\$${getTotalPrice().toString()}',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
               ),
-              _buildProceedToPayButton(),
+              _proceedButton(),
             ],
           ),
 
@@ -191,30 +191,31 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
     );
   }
 
-  Widget _buildProceedToPayButton() {
+
+
+
+  Widget _proceedButton() {
     return ElevatedButton(
       onPressed: selectedSeats.isNotEmpty ? () {
         bookSeats();
       } : null,
-      child: Text('Book Seats ',style: TextStyle(color: Colors.white),),
       style: ElevatedButton.styleFrom(
 
         backgroundColor: fillColor,
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+        padding:  const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
 
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
       ),
+      child:  const Text('Book Seats ',style: TextStyle(color: Colors.white),),
     );
   }
-
   Widget _buildSeatLegend(String text, Color color) {
     return Container(
-      margin: EdgeInsets.only(left: 10, bottom: 10),
-      padding:  EdgeInsets.only(left: 10, bottom: 10,right: 10,top: 10),
+      margin:const EdgeInsets.only(left: 10, bottom: 10),
+      padding:const  EdgeInsets.only(left: 10, bottom: 10,right: 10,top: 10),
       decoration: BoxDecoration(
-        // color: AppColors.strokeColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -230,8 +231,8 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
               color: color,
             ),
           ),
-          SizedBox(width: 8),
-          Text(text,style: TextStyle(color: AppColors.primaryThreeElementText),),
+          const  SizedBox(width: 8),
+          Text(text,style:const TextStyle(color: AppColors.primaryThreeElementText),),
         ],
       ),
     );

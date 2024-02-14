@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../models/movie_model.dart';
@@ -10,7 +9,7 @@ class MovieSearchCard extends StatelessWidget {
   final Movie movie;
   final String imageUrlBase = 'https://image.tmdb.org/t/p/w500';
 
-  MovieSearchCard({
+  const MovieSearchCard({
     Key? key,
     required this.movie,
   }) : super(key: key);
@@ -47,21 +46,21 @@ class MovieSearchCard extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(width: 16),
+                const  SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         movie.title,
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.titleMedium,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
-                      SizedBox(height: 4),
+                      const  SizedBox(height: 4),
                       Text(
                         genreDisplayText,
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),

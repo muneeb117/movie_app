@@ -29,7 +29,7 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title:const Text(
           "Settings",
           style: TextStyle(color: Colors.black),
         ),
@@ -56,16 +56,16 @@ class _SettingScreenState extends State<SettingScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Conform Logout",),
+                          title: const Text("Conform Logout",),
                           actions: [
                             TextButton(
                                 onPressed: () => Navigator.of(context).pop(),
-                                child: Text("Cancel")),
+                                child:const Text("Cancel")),
                             TextButton(
                                 onPressed: () {
                                   removeUserData();
                                 },
-                                child: Text("Conform"))
+                                child:const Text("Conform"))
                           ],
                         );
                       });

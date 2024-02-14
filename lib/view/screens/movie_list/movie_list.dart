@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/models/movie_model.dart';
-import 'package:movie_app/routes/name.dart';
 import 'package:movie_app/view/screens/movie_list/widgets/movie_card_widgets.dart';
 
 import '../../../utils/colors_list.dart';
@@ -10,17 +8,19 @@ import '../search/search_screen.dart';
 import 'bloc/movie_list_bloc.dart';
 import 'bloc/movie_list_event.dart';
 import 'bloc/movie_list_state.dart';
-
 class MovieListScreen extends StatefulWidget {
+  const MovieListScreen({super.key});
+
   @override
-  _MovieListScreenState createState() => _MovieListScreenState();
+  State<MovieListScreen> createState() => _MovieListScreenState();
 }
 
 class _MovieListScreenState extends State<MovieListScreen> {
+
   @override
   void initState() {
     super.initState();
-    context.read<MovieListBloc>().add(FetchUpcomingMoviesEvent());
+    context.read<MovieListBloc>().add(const FetchUpcomingMoviesEvent());
   }
 
   void _navigateToSearchScreen() {

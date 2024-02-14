@@ -61,9 +61,9 @@ class TmdbApiClient {
               .toList();
         }
 
-        trailers.forEach((trailer) {
+        for (var trailer in trailers) {
           print("Fetched trailer key: ${trailer.key}");
-        });
+        }
 
         return trailers;
       } else {

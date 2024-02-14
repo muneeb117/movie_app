@@ -7,10 +7,7 @@ import 'package:movie_app/utils/colors_list.dart';
 import 'package:movie_app/view/screens/cinema_booking/screens/cinema_screen/cinema_screen_hall.dart';
 import 'package:movie_app/view/screens/movie_detail_screen/bloc/movie_detail_bloc.dart';
 import 'package:movie_app/view/screens/movie_detail_screen/widgets/build_action_button.dart';
-
-import '../../../models/user_detail_model.dart';
 import '../../../repository/movie_repository.dart';
-import '../cinema_booking/screens/cinema_screen/seat_selection_screen.dart';
 import '../mqtt/chat_screen.dart';
 import '../trailer_screen/trailer_screen.dart';
 import 'bloc/movie_detail_event.dart';
@@ -23,7 +20,7 @@ class MovieDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = "https://image.tmdb.org/t/p/w500";
+    const imageUrl = "https://image.tmdb.org/t/p/w500";
     return BlocProvider(
       create: (context) => MovieDetailBloc(
           movieRepository: RepositoryProvider.of<MovieRepository>(context))
@@ -48,7 +45,7 @@ class MovieDetailScreen extends StatelessWidget {
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.5),
-                                offset: Offset(0, 4),
+                                offset: const Offset(0, 4),
                                 blurRadius: 8,
                               ),
                             ],
@@ -56,7 +53,7 @@ class MovieDetailScreen extends StatelessWidget {
                           child: Stack(
                             children: [
                               Image.network(
-                                '${imageUrl + movie!.posterPath}',
+                                imageUrl + movie!.posterPath,
                                 fit: BoxFit.cover,
                                 height: 400.h,
                                 width: double.infinity,
@@ -105,42 +102,42 @@ class MovieDetailScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               IconButton(
-                                icon: Icon(Icons.arrow_back_ios,
+                                icon: const Icon(Icons.arrow_back_ios,
                                     color: Colors.white),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
                               ),
-                              Text(
+                              const Text(
                                 "Watch",
                                 style: TextStyle(
                                     fontSize: 20, color: Colors.white),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 200,
                               ),
                               IconButton(
                                 onPressed: () async {
-
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ChatScreen(
-                                          movieId: movie!.id.toString(),
-                                          movieName: movie!.title,
-                                         ),
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatScreen(
+                                        movieId: movie!.id.toString(),
+                                        movieName: movie!.title,
                                       ),
-                                    );
-
+                                    ),
+                                  );
                                 },
-                                icon: Icon(Icons.message_outlined,color: Colors.white,),
+                                icon: const Icon(
+                                  Icons.message_outlined,
+                                  color: Colors.white,
+                                ),
                               )
                             ],
                           ),
                         ),
                         Positioned(
-                          top:
-                              250,
+                          top: 250,
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 4),
@@ -175,7 +172,7 @@ class MovieDetailScreen extends StatelessWidget {
                                               )));
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               buildActionButton(
@@ -184,7 +181,7 @@ class MovieDetailScreen extends StatelessWidget {
                                   color: Colors.transparent,
                                   borderColor: Colors.blue,
                                   onTap: () {
-                                    print(movie!.trailers.length);
+                                    // print(movie!.trailers.length);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -208,26 +205,25 @@ class MovieDetailScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 20),
                       child: Wrap(
                         spacing: 8.0,
                         children: movie!.genres.map((genre) {
                           return Theme(
                             data: Theme.of(context).copyWith(
                               chipTheme: Theme.of(context).chipTheme.copyWith(
-                                    side: BorderSide
-                                        .none,
+                                    side: BorderSide.none,
                                   ),
                             ),
                             child: Chip(
-                              labelPadding: EdgeInsets.all(2.0),
+                              labelPadding: const EdgeInsets.all(2.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               label: Text(
                                 genre.name,
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
                               backgroundColor:
                                   genreColors[genre.id % genreColors.length],
@@ -254,8 +250,8 @@ class MovieDetailScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10),
                       child: Text(movie!.overview),
                     ),
                   ],
@@ -270,4 +266,5 @@ class MovieDetailScreen extends StatelessWidget {
         ),
       ),
     );
-  }}
+  }
+}

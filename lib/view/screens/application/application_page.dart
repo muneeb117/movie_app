@@ -23,10 +23,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
       return Scaffold(
         body: buildPage(state.index),
         bottomNavigationBar: Container(
-          // height: 58.h,
-          // width: 375.w,
           decoration: BoxDecoration(
-             // color: Colors.black,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.h),
                 topRight: Radius.circular(20.h),

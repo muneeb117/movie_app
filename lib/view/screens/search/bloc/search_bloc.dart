@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/view/screens/search/bloc/search_events.dart';
 import 'package:movie_app/view/screens/search/bloc/search_states.dart';
 

@@ -33,7 +33,6 @@ class RegisterController {
 
       User? user = credential.user;
       if (user != null) {
-        // Add user data to Firestore
         await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           'userName': userName,
           'email': email,

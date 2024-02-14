@@ -9,12 +9,11 @@ import 'package:movie_app/view/screens/register/bloc/register_bloc.dart';
 import 'package:movie_app/view/screens/search/bloc/search_bloc.dart';
 import 'package:movie_app/view/screens/sign_in/bloc/signin_blocs.dart';
 import 'package:movie_app/view/screens/trailer_screen/bloc/trailer_bloc.dart';
-import 'package:movie_app/view/screens/welcome/bloc/welcome_bloc.dart';
 
 class AppBlocProviders {
   static List<BlocProvider> allBlocProvider(BuildContext context) {
     return [
-      BlocProvider(create: (context) => WelcomeBloc()),
+      // BlocProvider(create: (context) => WelcomeBloc()),
       BlocProvider(create: (context) => SignInBlocs()),
       BlocProvider(create: (context) => RegisterBloc()),
       BlocProvider(create: (context) => AppBlocs()),

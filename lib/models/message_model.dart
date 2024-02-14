@@ -26,7 +26,7 @@ class Message {
   static Message fromString(String payload) {
     final parts = payload.split(':');
     if (parts.length < 3) {
-      throw FormatException('Payload is not in the expected format.');
+      throw const FormatException('Payload is not in the expected format.');
     }
     final userId = parts[0];
     final userName = parts[1];

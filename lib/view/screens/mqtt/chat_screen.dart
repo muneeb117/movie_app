@@ -10,10 +10,11 @@ class ChatScreen extends StatefulWidget {
   final String movieId;
   final String movieName;
 
-  const ChatScreen({Key? key, required this.movieId, required this.movieName}) : super(key: key);
+  const ChatScreen({Key? key, required this.movieId, required this.movieName})
+      : super(key: key);
 
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
@@ -44,7 +45,8 @@ class _ChatScreenState extends State<ChatScreen> {
           .doc(user.uid)
           .get();
       if (userData.exists) {
-        return UserDetail.fromMap(userData.data() as Map<String, dynamic>, user.uid);
+        return UserDetail.fromMap(
+            userData.data() as Map<String, dynamic>, user.uid);
       } else {
         Fluttertoast.showToast(msg: "User data not found.");
       }
@@ -56,7 +58,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _initializeMQTTClient() {
     if (userDetail != null) {
-      _mqttManager = MQTTManager(server: 'broker.hivemq.com', clientId: userDetail!.userId);
+      _mqttManager = MQTTManager(
+          server: 'broker.hivemq.com', clientId: userDetail!.userId);
       _mqttManager.initializeMQTTClient().then((connected) {
         if (connected) {
           _mqttManager.subscribeToTopic('movie/${widget.movieId}/chat');
@@ -66,7 +69,9 @@ class _ChatScreenState extends State<ChatScreen> {
         }
       });
     }
-  }void _listenForNewMessages() {
+  }
+
+  void _listenForNewMessages() {
     _mqttManager.messages.listen((messagePayload) {
       Message message = Message.fromString(messagePayload);
       if (!isMessagePresent(message)) {
@@ -89,7 +94,8 @@ class _ChatScreenState extends State<ChatScreen> {
         .orderBy('timestamp')
         .snapshots()
         .listen((snapshot) {
-      List<Message> newMessages = snapshot.docs.map((doc) => Message.fromFirestore(doc)).toList();
+      List<Message> newMessages =
+          snapshot.docs.map((doc) => Message.fromFirestore(doc)).toList();
       if (mounted) {
         setState(() {
           messages.clear();
@@ -101,14 +107,17 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _sendMessage() {
     if (_messageController.text.isNotEmpty && userDetail != null) {
-      final payload = '${userDetail!.userId}:${userDetail!.name}:${_messageController.text}';
+      final payload =
+          '${userDetail!.userId}:${userDetail!.name}:${_messageController.text}';
       _mqttManager.publishMessage('movie/${widget.movieId}/chat', payload);
-      _storeMessageInFirestore(userDetail!.userId, userDetail!.name, _messageController.text);
+      _storeMessageInFirestore(
+          userDetail!.userId, userDetail!.name, _messageController.text);
       _messageController.clear();
     }
   }
 
-  void _storeMessageInFirestore(String userId, String userName, String messageText) {
+  void _storeMessageInFirestore(
+      String userId, String userName, String messageText) {
     final message = Message(
       userId: userId,
       userName: userName,
@@ -133,7 +142,8 @@ class _ChatScreenState extends State<ChatScreen> {
           Expanded(
             child: ListView.builder(
               itemCount: messages.length,
-              itemBuilder: (context, index) => _buildMessageTile(messages[index]),
+              itemBuilder: (context, index) =>
+                  _buildMessageTile(messages[index]),
             ),
           ),
           _buildMessageInputField(),
@@ -147,13 +157,15 @@ class _ChatScreenState extends State<ChatScreen> {
     return Align(
       alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
         decoration: BoxDecoration(
           color: isCurrentUser ? Colors.blue : Colors.grey[300],
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Text("${message.userName}: ${message.text}", style: TextStyle(color: isCurrentUser ? Colors.white : Colors.black)),
+        child: Text("${message.userName}: ${message.text}",
+            style:
+                TextStyle(color: isCurrentUser ? Colors.white : Colors.black)),
       ),
     );
   }
@@ -168,12 +180,13 @@ class _ChatScreenState extends State<ChatScreen> {
               controller: _messageController,
               decoration: InputDecoration(
                 hintText: "Type a message...",
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
             ),
           ),
           IconButton(
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
             onPressed: _sendMessage,
           ),
         ],

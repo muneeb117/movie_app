@@ -1,6 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../models/movie_model.dart';
 import '../../../../repository/movie_repository.dart';
 import 'movie_detail_event.dart';
 import 'movie_detail_state.dart';

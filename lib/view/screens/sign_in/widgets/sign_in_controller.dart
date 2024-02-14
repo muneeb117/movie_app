@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/routes/name.dart';
-
 import '../../../../global.dart';
 import '../../../../utils/constants.dart';
 import '../../../widgets/flutter_toast.dart';
@@ -40,7 +39,7 @@ class SignInController {
             Global.storageServices.setString(AppConstants.STORAGE_USER_TOKEN_KEY, token!);
             Navigator.pushNamedAndRemoveUntil(context, AppRoutes.application, (route) => false);
           } else {
-            print("user not exist");
+           // print("user not exist");
           }
         } on FirebaseAuthException catch (e) {
           if (e.code == "user-not-found") {
@@ -53,7 +52,7 @@ class SignInController {
         }
       }
     } catch (e) {
-      print(e);
+     // print(e);
     }
   }
 }

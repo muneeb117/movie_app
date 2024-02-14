@@ -129,7 +129,7 @@ Widget buildReusableContainer({required String image, required String text}) {
             decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/icons/${image}.png")),
+                  image: AssetImage("assets/icons/$image.png")),
             )),
         const SizedBox(height: 5),
         Text(
@@ -156,8 +156,8 @@ Widget reusableProfileMenuItems(
             color: AppColors.primary_bg,
           ),
           child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Image.asset("assets/icons/${imagePath}.png")),
+              padding:const  EdgeInsets.all(12),
+              child: Image.asset("assets/icons/$imagePath.png")),
         ),
         const SizedBox(width: 25),
         Text(

@@ -7,7 +7,7 @@ import '../../../../utils/colors_list.dart';
 AppBar buildAppBar(String text) {
   return AppBar(
     bottom: PreferredSize(
-      preferredSize: Size.fromHeight(1.0),
+      preferredSize: const Size.fromHeight(1.0),
       child: Container(
         color: AppColors.primarySecondaryBackground,
         height: 1.0,
@@ -92,12 +92,12 @@ Widget buildTextField(String text, String textType, String iconName,
     child: Row(
       children: [
         Container(
-          margin: EdgeInsets.only(left: 17),
+          margin:const EdgeInsets.only(left: 17),
           width: 16.w,
           height: 16.h,
-          child: Image.asset("assets/icons/${iconName}.png"),
+          child: Image.asset("assets/icons/$iconName.png"),
         ),
-        Container(
+          SizedBox(
           width: 270.w,
           height: 50.h,
           child: TextField(
@@ -107,20 +107,20 @@ Widget buildTextField(String text, String textType, String iconName,
             },
             decoration: InputDecoration(
                 hintText: text,
-                border: const OutlineInputBorder(
+                border:  const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
                 ),
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder:  const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
                 ),
-                enabledBorder: const OutlineInputBorder(
+                enabledBorder:  const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
                 ),
-                disabledBorder: const OutlineInputBorder(
+                disabledBorder:  const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
                 ),
                 hintStyle:
-                    TextStyle(color: AppColors.primarySecondaryElementText)),
+                  const  TextStyle(color: AppColors.primarySecondaryElementText)),
             autocorrect: true,
             obscureText: textType == "password" ? true : false,
             style: TextStyle(
@@ -136,7 +136,7 @@ Widget buildTextField(String text, String textType, String iconName,
 }
 
 Widget forgotPassword() {
-  return Container(
+  return  SizedBox(
     width: 260.w,
     height: 44.h,
     child: GestureDetector(
@@ -173,7 +173,7 @@ Widget buildLoginAndRegButton(
             BoxShadow(
                 spreadRadius: 1,
                 blurRadius: 2,
-                offset: Offset(0, 1),
+                offset: const Offset(0, 1),
                 color: Colors.grey.withOpacity(0.1))
           ]),
       child: Center(

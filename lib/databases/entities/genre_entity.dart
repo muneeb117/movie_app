@@ -13,7 +13,7 @@ class GenreEntity {
   });
 
   Genre toGenre() {
-    return Genre(id: this.id, name: this.name);
+    return Genre(id: id, name: name);
   }
 
   static GenreEntity fromGenre(Genre genre, int movieId) {

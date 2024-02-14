@@ -4,10 +4,10 @@ import 'package:movie_app/view/screens/more_screen/settings/bloc/setting_state.d
 import 'package:movie_app/view/screens/more_screen/settings/bloc/state_event.dart';
 
 class SettingBlocs extends Bloc<SettingEvents,SettingStates>{
-  SettingBlocs():super(SettingStates()){
+  SettingBlocs():super(const SettingStates()){
     on<TriggeredEvents>(_triggeredEvents);
   }
   _triggeredEvents(SettingEvents,Emitter<SettingStates>emit){
-    emit(SettingStates());
+    emit(const SettingStates());
   }
 }
