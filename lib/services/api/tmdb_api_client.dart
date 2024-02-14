@@ -26,10 +26,9 @@ class TmdbApiClient {
   Future<MovieDTO> fetchMovieDetails(int movieId) async {
     try {
       final movieResponse = await _dio.get('/movie/$movieId', queryParameters: {
-        'append_to_response': 'videos', // Include videos in the response
+        'append_to_response': 'videos',
       });
 
-      // Assuming MovieDTO.fromJson method is capable of handling genres and trailers
       return MovieDTO.fromJson(movieResponse.data);
     } catch (e) {
       throw Exception('Failed to fetch movie details: $e');

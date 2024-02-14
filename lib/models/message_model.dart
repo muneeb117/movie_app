@@ -13,18 +13,16 @@ class Message {
     required this.timestamp,
   });
 
-  // Factory constructor to create a Message object from a Firestore document snapshot
   factory Message.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Message(
       userId: data['userId'] ?? '',
       userName: data['userName'] ?? '',
-      text: data['message'] ?? '', // Ensure this matches your Firestore field
+      text: data['message'] ?? '',
       timestamp: (data['timestamp'] as Timestamp).toDate(),
     );
   }
 
-  // Factory constructor to create a Message object from an MQTT payload string
   static Message fromString(String payload) {
     final parts = payload.split(':');
     if (parts.length < 3) {
@@ -32,17 +30,16 @@ class Message {
     }
     final userId = parts[0];
     final userName = parts[1];
-    final text = parts.skip(2).join(':'); // Join back if ':' were part of the original message
+    final text = parts.skip(2).join(':');
 
     return Message(
       userId: userId,
       userName: userName,
       text: text,
-      timestamp: DateTime.now(), // Approximation, actual timestamp is set when storing in Firestore
+      timestamp: DateTime.now(),
     );
   }
 
-  // Method to convert a Message object into a map for Firestore storage
   Map<String, dynamic> toFirestoreMap() {
     return {
       'userId': userId,
@@ -53,7 +50,6 @@ class Message {
   }
   String get uniqueId => "$userId-${timestamp.millisecondsSinceEpoch}";
 
-  // Method to serialize the Message object into a string for MQTT transmission
   @override
   String toString() {
     return '$userId:$userName:$text';
