@@ -24,10 +24,9 @@ void main() {
     blocTest<MovieListBloc, MovieListState>(
       'emits [MoviesLoadingState, MoviesLoadedState] when FetchUpcomingMoviesEvent is added and movies are fetched successfully',
       build: () => movieListBloc,
-      act: (bloc) => bloc.add(FetchUpcomingMoviesEvent()),
+      act: (bloc) => bloc.add(const FetchUpcomingMoviesEvent()),
       setUp: () {
-        // Mock the repository's response when fetching upcoming movies
-        when(mockMovieRepository.getUpcomingMovies()).thenAnswer((_) async => [/* List of movies here */]);
+        when(mockMovieRepository.getUpcomingMovies()).thenAnswer((_) async => []);
       },
       expect: () => [
         isA<MoviesLoadingState>(),
@@ -38,9 +37,8 @@ void main() {
     blocTest<MovieListBloc, MovieListState>(
       'emits [MoviesLoadingState, MoviesErrorState] when FetchUpcomingMoviesEvent is added and fetching movies fails',
       build: () => movieListBloc,
-      act: (bloc) => bloc.add(FetchUpcomingMoviesEvent()),
+      act: (bloc) => bloc.add(const FetchUpcomingMoviesEvent()),
       setUp: () {
-        // Mock the repository to throw an exception when fetching upcoming movies
         when(mockMovieRepository.getUpcomingMovies()).thenThrow(Exception('Failed to fetch movies'));
       },
       expect: () => [
@@ -49,7 +47,6 @@ void main() {
       ],
     );
 
-    // Clean up after tests
     tearDown(() {
       movieListBloc.close();
     });

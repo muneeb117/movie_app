@@ -1,6 +1,6 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Constants {
-  static const String apiKey = 'a55f4fba6e4b9173bda8c6949c625b15';
-
-  static const String apiBaseUrl = 'https://api.themoviedb.org/3';
-
+  static String get apiKey => dotenv.env['API_KEY'] ?? 'default_api_key';
+  static String get apiBaseUrl => dotenv.env['API_BASE_URL'] ?? 'default_base_url';
 }

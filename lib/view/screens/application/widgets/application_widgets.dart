@@ -4,17 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/view/screens/more_screen/profile_screen.dart';
 import 'package:movie_app/view/screens/movie_list/movie_list.dart';
+import 'package:movie_app/view/screens/watch/watch.dart';
 
 Widget buildPage(int index) {
   List<Widget> _widgets = [
 
     MovieListScreen(),
-    Center(
-      child: Text("search"),
-    ),
-    Center(
-      child: Text("other"),
-    ),
+    WatchScreen(),
+    WatchScreen(),
+
     ProfileScreen(),
     // ProfilePage()
   ];
